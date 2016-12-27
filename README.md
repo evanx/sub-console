@@ -44,6 +44,7 @@ reverseFile=~/tmp/logger-phantomjs-redis.json subscribeChannel=logger:phantomjs-
 ```
 
 ![screenshot](https://raw.githubusercontent.com/evanx/sub-write/master/readme-images/logger-phantomjs-redis.png)
+<hr>
 
 ## Sample use case
 
