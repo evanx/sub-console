@@ -38,7 +38,7 @@ subscribeChannel=logger:mylogger formatter=prettyjson npm start
 ```
 where the `prettyjson` formatter is specified i.e. https://github.com/rafeca/prettyjson
 
-Note the `reverseFile` option is useful to reverse the last 10 messages and view via your browser, presumeably with a JSON formatter extension, using a CLI HTTP server to serve the file.
+Note the `reverseFile` option is useful to reverse the last 10 messages and view via your browser, presumeably with a JSON formatter extension, using a CLI HTTP server to serve the file e.g. https://www.npmjs.com/package/http-server
 ```shell
 reverseFile=~/tmp/logger-phantomjs-redis.json subscribeChannel=logger:phantomjs-redis npm start
 ```
