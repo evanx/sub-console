@@ -46,6 +46,8 @@ reverseFile=~/tmp/logger-phantomjs-redis.json subscribeChannel=logger:phantomjs-
 ![screenshot](https://raw.githubusercontent.com/evanx/sub-write/master/readme-images/logger-phantomjs-redis.png)
 <hr>
 
+See https://github.com/evanx/sublog-http which will itself serve the last 10 reversed JSON messages via a specified port for a built-in HTTP server.
+
 ## Sample use case
 
 This service is intended for a personal requirement to subscribe to logging messages published via Redis.
