@@ -34,9 +34,9 @@ const config = ['subscribeChannel'].reduce((config, key) => {
 
 For example the following command line runs this service to subscribe to channel `logger:mylogger` and log messages.
 ```shell
-formatter=jsome subscribeChannel=logger:mylogger npm start
+subscribeChannel=logger:mylogger formatter=prettyjson npm start
 ```
-where the `jsome` JSON colorizer/formatter is specified.
+where the `prettyjson` formatter is specified i.e. https://github.com/rafeca/prettyjson
 
 Note the `reverseFile` option is useful to reverse the last 10 messages and view via your browser, presumeably with a JSON formatter extension, using a CLI HTTP server to serve the file.
 ```shell
