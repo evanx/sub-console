@@ -7,11 +7,15 @@ The essence of the implementation is as follows:
 async function startProduction() {
     sub.on('message', (channel, message) => {
         if (process.env.formatter === 'jsome') {
-            jsome(JSON.parse(message));
+            jsome(JSON.parse(message), {});
         } else if (process.env.formatter === 'prettyjson') {
             console.log(prettyjson.render(JSON.parse(message)));
         } else if (process.env.jsonIndent > 0) {
             console.log(JSON.stringify(JSON.parse(message), null, parseInt(process.env.jsonIndent)));
+        } else if (process.env.reverseFile) {
+            state.messages.splice(0, 0, JSON.parse(message));
+            state.messages = state.messages.slice(0, 10);
+            fs.writeFile(process.env.reverseFile, JSON.stringify(state.messages, null, 2));
         } else {
             console.log(message);
         }
@@ -30,10 +34,14 @@ const config = ['subscribeChannel'].reduce((config, key) => {
 
 For example the following command line runs this service to subscribe to channel `logger:mylogger` and log messages.
 ```shell
-formatter=jsome subscribeChannel=logger:mylogger npm run development
+formatter=jsome subscribeChannel=logger:mylogger npm start
 ```
 where the `jsome` JSON colorizer/formatter is specified.
 
+Note the `reverseFile` option is useful to reverse the last 10 messages and view via your browser, presumeably with a JSON formatter extension, using a CLI HTTP server to serve the file.
+```shell
+reverseFile=~/tmp/logger-phantomjs-redis.json subscribeChannel=logger:phantomjs-redis npm start
+```
 
 ## Sample use case
 
@@ -68,6 +76,7 @@ However we want to pipe to a command-line JSON formatter to enjoy a more readabl
 ```
 
 We found that `redis-cli psubscribe` didn't suit that use case, e.g. piping to `jq` or `python -mjson.tool` to format the JSON. See https://github.com/evanx/sub-push where we transfer messages to a list, `brpop` and then pipe to `jq`
+
 
 ## Related projects
 

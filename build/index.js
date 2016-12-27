@@ -38,11 +38,15 @@ let startProduction = (() => {
     var _ref4 = _asyncToGenerator(function* () {
         sub.on('message', function (channel, message) {
             if (process.env.formatter === 'jsome') {
-                jsome(JSON.parse(message));
+                jsome(JSON.parse(message), {});
             } else if (process.env.formatter === 'prettyjson') {
                 console.log(prettyjson.render(JSON.parse(message)));
             } else if (process.env.jsonIndent > 0) {
                 console.log(JSON.stringify(JSON.parse(message), null, parseInt(process.env.jsonIndent)));
+            } else if (process.env.reverseFile) {
+                state.messages.splice(0, 0, JSON.parse(message));
+                state.messages = state.messages.slice(0, 10);
+                fs.writeFile(process.env.reverseFile, JSON.stringify(state.messages, null, 2));
             } else {
                 console.log(message);
             }
@@ -68,6 +72,7 @@ let end = (() => {
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 const assert = require('assert');
+const fs = require('fs');
 const lodash = require('lodash');
 const Promise = require('bluebird');
 const prettyjson = require('prettyjson');
@@ -80,6 +85,10 @@ const config = ['subscribeChannel'].reduce((config, key) => {
 }, {});
 const redis = require('redis');
 const sub = redis.createClient();
+
+const state = {
+    messages: []
+};
 
 assert(process.env.NODE_ENV);
 
