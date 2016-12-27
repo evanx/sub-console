@@ -43,6 +43,8 @@ Note the `reverseFile` option is useful to reverse the last 10 messages and view
 reverseFile=~/tmp/logger-phantomjs-redis.json subscribeChannel=logger:phantomjs-redis npm start
 ```
 
+!(screenshot)[https://raw.githubusercontent.com/evanx/sub-write/master/readme-images/logger-phantomjs-redis.png]
+
 ## Sample use case
 
 This service is intended for a personal requirement to subscribe to logging messages published via Redis.
