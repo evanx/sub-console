@@ -81,18 +81,6 @@ However we want to pipe to a command-line JSON formatter to enjoy a more readabl
 We found that `redis-cli psubscribe` didn't suit that use case, e.g. piping to `jq` or `python -mjson.tool` to format the JSON. See https://github.com/evanx/sub-push where we transfer messages to a list, `brpop` and then pipe to `jq`
 
 
-## Related projects
-
-See
-- https://github.com/evanx/sub-push - subscribe to Redis pubsub channel and transfer messages to a Redis list
-- https://github.com/evanx/sublog-http - subscribe and serve messages via HTTP with pretty JSON formatting
-
-
-We plan to publish microservices that similarly subscribe, but with purpose-built rendering for logging messages e.g. error messages coloured red.
-
-Watch
-- https://github.com/evanx/sublog-console
-
 ## Related code
 
 Incidently, some sample Node code for a client logger that publishes via Redis:
