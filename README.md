@@ -1,4 +1,4 @@
-# sub-console
+# sub-write
 
 A microservice to subscribe to a Redis pubsub channel, and print messages to the console.
 
@@ -6,7 +6,15 @@ The essence of the implementation is as follows:
 ```javascript
 async function startProduction() {
     sub.on('message', (channel, message) => {
-        console.log({channel, message});
+        if (process.env.formatter === 'jsome') {
+            jsome(JSON.parse(message));
+        } else if (process.env.formatter === 'prettyjson') {
+            console.log(prettyjson.render(JSON.parse(message)));
+        } else if (process.env.jsonIndent > 0) {
+            console.log(JSON.stringify(JSON.parse(message), null, parseInt(process.env.jsonIndent)));
+        } else {
+            console.log(message);
+        }
     });
     sub.subscribe(config.subscribeChannel);
 }
@@ -22,8 +30,10 @@ const config = ['subscribeChannel'].reduce((config, key) => {
 
 For example the following command line runs this service to subscribe to channel `logger:mylogger` and log messages.
 ```shell
-subscribeChannel=logger:mylogger npm start
+formatter=jsome subscribeChannel=logger:mylogger npm run development
 ```
+where the `jsome` JSON colorizer/formatter is specified.
+
 
 ## Sample use case
 

@@ -1,5 +1,5 @@
 {
-  "name": "sub-console",
+  "name": "sub-write",
   "version": "0.0.1",
   "description": "Subscribe to Redis channel and push messages to a Redis list",
   "main": "index.js",
@@ -14,7 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.4.6",
+    "jsome": "^2.3.25",
     "lodash": "^4.17.2",
+    "prettyjson": "^1.2.1",
     "redis": "^2.6.3"
   },
   "devDependencies": {
@@ -24,10 +26,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/evanx/sub-console.git"
+    "url": "git+https://github.com/evanx/sub-write.git"
   },
   "bugs": {
-    "url": "https://github.com/evanx/sub-console/issues"
+    "url": "https://github.com/evanx/sub-write/issues"
   },
-  "homepage": "https://github.com/evanx/sub-console#readme"
+  "homepage": "https://github.com/evanx/sub-write#readme"
 }
